@@ -1,0 +1,21 @@
+sudo -u postgres psql
+
+-- Drop the broken user and start fresh
+DROP DATABASE IF EXISTS auth_practice;
+DROP USER IF EXISTS "user";
+
+-- Create user with a non-reserved name
+CREATE USER auth_user WITH PASSWORD '@user123';
+
+-- Create the databases
+CREATE DATABASE auth_db OWNER auth_user;
+
+-- Grant privileges
+GRANT ALL PRIVILEGES ON DATABASE auth_db TO auth_user;
+
+-- Verify
+\l
+
+\q
+
+ALTER USER auth_user WITH PASSWORD 'user123';
